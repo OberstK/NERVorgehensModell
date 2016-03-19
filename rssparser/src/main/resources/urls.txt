@@ -1,0 +1,9 @@
+https://de.finance.yahoo.com/nachrichten/kategorie-ergebnisse/?format=rss
+http://www.handelsblatt.com/contentexport/feed/unternehmen
+http://www.wiwo.de/contentexport/feed/rss/unternehmen
+http://www.manager-magazin.de/unternehmen/index.rss
+http://www.faz.net/rss/aktuell/wirtschaft/unternehmen/
+http://www.finanznachrichten.de/rss-aktien-adhoc
+https://www.boersen-zeitung.de/xml_base/rss.php?dpasubm=unt
+https://www.boersen-zeitung.de/xml_base/rss.php?dpasubm=aho
+http://www.wallstreet-online.de/rss/nachrichten-unternehmen.xml

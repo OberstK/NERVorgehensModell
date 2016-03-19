@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process version="5.3.015">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="5.3.015" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="lod:SPARQL Data Importer" compatibility="1.5.001" expanded="true" height="60" name="SPARQL Data Importer" width="90" x="112" y="165">
+        <parameter key="SPARQL connection" value="DBpedia"/>
+        <parameter key="SPARQL query" value="SELECT ?name WHERE {&#10;     ?company a dbo:Company  .&#10;     ?company rdfs:label ?name .&#10;     FILTER (lang(?name) = 'en'). &#10;} ORDER by ?name LIMIT 10000"/>
+      </operator>
+      <operator activated="true" class="write_database" compatibility="5.3.015" expanded="true" height="60" name="Write Database" width="90" x="648" y="165">
+        <parameter key="define_connection" value="predefined"/>
+        <parameter key="connection" value="XAMPP"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="table_name" value="companies"/>
+        <parameter key="overwrite_mode" value="append"/>
+        <parameter key="set_default_varchar_length" value="false"/>
+        <parameter key="default_varchar_length" value="128"/>
+        <parameter key="add_generated_primary_keys" value="false"/>
+        <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+        <parameter key="batch_size" value="1"/>
+      </operator>
+      <operator activated="true" class="lod:SPARQL Data Importer" compatibility="1.5.001" expanded="true" height="60" name="SPARQL Data Importer (2)" width="90" x="112" y="255">
+        <parameter key="SPARQL connection" value="DBpedia"/>
+        <parameter key="SPARQL query" value="SELECT ?name WHERE {&#10;     ?company a dbo:Company  .&#10;     ?company rdfs:label ?name .&#10;     FILTER (lang(?name) = 'en'). &#10;} ORDER by ?name LIMIT 10000 OFFSET 10000 "/>
+      </operator>
+      <operator activated="true" class="write_database" compatibility="5.3.015" expanded="true" height="60" name="Write Database (2)" width="90" x="648" y="255">
+        <parameter key="define_connection" value="predefined"/>
+        <parameter key="connection" value="XAMPP"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="table_name" value="companies"/>
+        <parameter key="overwrite_mode" value="append"/>
+        <parameter key="set_default_varchar_length" value="false"/>
+        <parameter key="default_varchar_length" value="128"/>
+        <parameter key="add_generated_primary_keys" value="false"/>
+        <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+        <parameter key="batch_size" value="1"/>
+      </operator>
+      <operator activated="true" class="lod:SPARQL Data Importer" compatibility="1.5.001" expanded="true" height="60" name="SPARQL Data Importer (3)" width="90" x="112" y="345">
+        <parameter key="SPARQL connection" value="DBpedia"/>
+        <parameter key="SPARQL query" value="SELECT ?name WHERE {&#10;     ?company a dbo:Company  .&#10;     ?company rdfs:label ?name .&#10;     FILTER (lang(?name) = 'en'). &#10;} ORDER by ?name LIMIT 10000 OFFSET 20000 "/>
+      </operator>
+      <operator activated="true" class="write_database" compatibility="5.3.015" expanded="true" height="60" name="Write Database (3)" width="90" x="648" y="345">
+        <parameter key="define_connection" value="predefined"/>
+        <parameter key="connection" value="XAMPP"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="table_name" value="companies"/>
+        <parameter key="overwrite_mode" value="append"/>
+        <parameter key="set_default_varchar_length" value="false"/>
+        <parameter key="default_varchar_length" value="128"/>
+        <parameter key="add_generated_primary_keys" value="false"/>
+        <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+        <parameter key="batch_size" value="1"/>
+      </operator>
+      <operator activated="true" class="lod:SPARQL Data Importer" compatibility="1.5.001" expanded="true" height="60" name="SPARQL Data Importer (4)" width="90" x="112" y="435">
+        <parameter key="SPARQL connection" value="DBpedia"/>
+        <parameter key="SPARQL query" value="SELECT ?name WHERE {&#10;     ?company a dbo:Company  .&#10;     ?company rdfs:label ?name .&#10;     FILTER (lang(?name) = 'en'). &#10;} ORDER by ?name LIMIT 10000 OFFSET 30000 "/>
+      </operator>
+      <operator activated="true" class="write_database" compatibility="5.3.015" expanded="true" height="60" name="Write Database (4)" width="90" x="648" y="435">
+        <parameter key="define_connection" value="predefined"/>
+        <parameter key="connection" value="XAMPP"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="table_name" value="companies"/>
+        <parameter key="overwrite_mode" value="append"/>
+        <parameter key="set_default_varchar_length" value="false"/>
+        <parameter key="default_varchar_length" value="128"/>
+        <parameter key="add_generated_primary_keys" value="false"/>
+        <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+        <parameter key="batch_size" value="1"/>
+      </operator>
+      <operator activated="true" class="lod:SPARQL Data Importer" compatibility="1.5.001" expanded="true" height="60" name="SPARQL Data Importer (5)" width="90" x="112" y="525">
+        <parameter key="SPARQL connection" value="DBpedia"/>
+        <parameter key="SPARQL query" value="SELECT  ?name &#10; WHERE &#10;   {&#10;     {&#10;&#9;&#9;SELECT ?name WHERE {&#10;&#9;&#9;     ?company a dbo:Company  .&#10;&#9;&#9;     ?company rdfs:label ?name .&#10;&#9;&#9;     FILTER (lang(?name) = 'en'). &#10;&#9;&#9;} ORDER by ?name&#10;     }&#10;   } &#10;OFFSET 40000 &#10; LIMIT 10000"/>
+      </operator>
+      <operator activated="true" class="write_database" compatibility="5.3.015" expanded="true" height="60" name="Write Database (5)" width="90" x="648" y="525">
+        <parameter key="define_connection" value="predefined"/>
+        <parameter key="connection" value="XAMPP"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="table_name" value="companies"/>
+        <parameter key="overwrite_mode" value="append"/>
+        <parameter key="set_default_varchar_length" value="false"/>
+        <parameter key="default_varchar_length" value="128"/>
+        <parameter key="add_generated_primary_keys" value="false"/>
+        <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+        <parameter key="batch_size" value="1"/>
+      </operator>
+      <operator activated="true" class="lod:SPARQL Data Importer" compatibility="1.5.001" expanded="true" height="60" name="SPARQL Data Importer (6)" width="90" x="112" y="615">
+        <parameter key="SPARQL connection" value="DBpedia"/>
+        <parameter key="SPARQL query" value="SELECT  ?name &#10; WHERE &#10;   {&#10;     {&#10;&#9;&#9;SELECT ?name WHERE {&#10;&#9;&#9;     ?company a dbo:Company  .&#10;&#9;&#9;     ?company rdfs:label ?name .&#10;&#9;&#9;     FILTER (lang(?name) = 'en'). &#10;&#9;&#9;} ORDER by ?name&#10;     }&#10;   } &#10;OFFSET 50000 &#10; LIMIT 10000"/>
+      </operator>
+      <operator activated="true" class="write_database" compatibility="5.3.015" expanded="true" height="60" name="Write Database (6)" width="90" x="648" y="615">
+        <parameter key="define_connection" value="predefined"/>
+        <parameter key="connection" value="XAMPP"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="table_name" value="companies"/>
+        <parameter key="overwrite_mode" value="append"/>
+        <parameter key="set_default_varchar_length" value="false"/>
+        <parameter key="default_varchar_length" value="128"/>
+        <parameter key="add_generated_primary_keys" value="false"/>
+        <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+        <parameter key="batch_size" value="1"/>
+      </operator>
+      <connect from_op="SPARQL Data Importer" from_port="Example Set" to_op="Write Database" to_port="input"/>
+      <connect from_op="SPARQL Data Importer (2)" from_port="Example Set" to_op="Write Database (2)" to_port="input"/>
+      <connect from_op="SPARQL Data Importer (3)" from_port="Example Set" to_op="Write Database (3)" to_port="input"/>
+      <connect from_op="SPARQL Data Importer (4)" from_port="Example Set" to_op="Write Database (4)" to_port="input"/>
+      <connect from_op="SPARQL Data Importer (5)" from_port="Example Set" to_op="Write Database (5)" to_port="input"/>
+      <connect from_op="SPARQL Data Importer (6)" from_port="Example Set" to_op="Write Database (6)" to_port="input"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+    </process>
+  </operator>
+</process>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process version="7.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="7.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="7.0.001" expanded="true" height="68" name="Read Database" width="90" x="45" y="34">
+        <parameter key="define_connection" value="predefined"/>
+        <parameter key="connection" value="XAMPP"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="database_url" value="jdbc:mysql://localhost:9000"/>
+        <parameter key="username" value="rapid"/>
+        <parameter key="password" value="eo3g5u+ewFQ="/>
+        <parameter key="define_query" value="table name"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="table_name" value="news"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="datamanagement" value="double_array"/>
+      </operator>
+      <operator activated="true" class="filter_examples" compatibility="7.0.001" expanded="true" height="103" name="Filter Examples" width="90" x="179" y="34">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="ID.lt.200"/>
+        </list>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="text:data_to_documents" compatibility="7.0.000" expanded="true" height="68" name="Data to Documents" width="90" x="313" y="34">
+        <parameter key="select_attributes_and_weights" value="true"/>
+        <list key="specify_weights"/>
+      </operator>
+      <operator activated="true" class="text:documents_to_data" compatibility="7.0.000" expanded="true" height="82" name="Documents to Data" width="90" x="447" y="34">
+        <parameter key="text_attribute" value="text"/>
+        <parameter key="add_meta_information" value="true"/>
+        <parameter key="datamanagement" value="double_sparse_array"/>
+      </operator>
+      <operator activated="true" class="informationExtraction:sentence_tokenizer" compatibility="1.0.000" expanded="true" height="82" name="SentenceTokenizer" width="90" x="581" y="34">
+        <parameter key="attribute" value="clean_content"/>
+        <parameter key="new token-name" value="sentence"/>
+      </operator>
+      <operator activated="true" class="informationExtraction:word_tokenizer" compatibility="1.0.000" expanded="true" height="82" name="WordTokenizer" width="90" x="715" y="34">
+        <parameter key="attribute" value="sentence"/>
+        <parameter key="new token-name" value="word"/>
+      </operator>
+      <operator activated="true" class="generate_id" compatibility="7.0.001" expanded="true" height="82" name="Generate ID" width="90" x="983" y="34">
+        <parameter key="create_nominal_ids" value="false"/>
+        <parameter key="offset" value="0"/>
+      </operator>
+      <operator activated="true" class="rename" compatibility="7.0.001" expanded="true" height="82" name="Rename" width="90" x="1184" y="34">
+        <parameter key="old_name" value="id"/>
+        <parameter key="new_name" value="Key"/>
+        <list key="rename_additional_attributes"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:write_database" compatibility="7.0.001" expanded="true" height="68" name="Write Database" width="90" x="1318" y="34">
+        <parameter key="define_connection" value="predefined"/>
+        <parameter key="connection" value="XAMPP"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="table_name" value="processed"/>
+        <parameter key="overwrite_mode" value="append"/>
+        <parameter key="set_default_varchar_length" value="false"/>
+        <parameter key="default_varchar_length" value="255"/>
+        <parameter key="add_generated_primary_keys" value="false"/>
+        <parameter key="db_key_attribute_name" value="key"/>
+        <parameter key="batch_size" value="1"/>
+      </operator>
+      <connect from_op="Read Database" from_port="output" to_op="Filter Examples" to_port="example set input"/>
+      <connect from_op="Filter Examples" from_port="example set output" to_op="Data to Documents" to_port="example set"/>
+      <connect from_op="Data to Documents" from_port="documents" to_op="Documents to Data" to_port="documents 1"/>
+      <connect from_op="Documents to Data" from_port="example set" to_op="SentenceTokenizer" to_port="example set input"/>
+      <connect from_op="SentenceTokenizer" from_port="example set output" to_op="WordTokenizer" to_port="example set input"/>
+      <connect from_op="WordTokenizer" from_port="example set output" to_op="Generate ID" to_port="example set input"/>
+      <connect from_op="Generate ID" from_port="example set output" to_op="Rename" to_port="example set input"/>
+      <connect from_op="Rename" from_port="example set output" to_op="Write Database" to_port="input"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+    </process>
+  </operator>
+</process>
